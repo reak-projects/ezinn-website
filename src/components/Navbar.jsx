@@ -22,12 +22,13 @@ export default function Navbar() {
           <img
             src="/logo.png"
             alt="EZinn Self-Service Kiosk Logo"
-            style={{ height: "42px", width: "auto", objectFit: "contain", mixBlendMode: "multiply" }}
+            style={{ height: "55px", width: "auto", objectFit: "contain", mixBlendMode: "multiply" }}
           />
         </a>
 
         <ul className="nav-links">
           <li><a href="#how-it-works" className="nav-link">How It Works</a></li>
+          <li><a href="#product" className="nav-link">Hardware</a></li>
           <li><a href="#benefits" className="nav-link">For Hotels</a></li>
           <li><a href="#guest-experience" className="nav-link">Guest Experience</a></li>
           <li><a href="#faq" className="nav-link">FAQ</a></li>

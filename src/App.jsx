@@ -2,6 +2,7 @@ import Navbar from "./components/Navbar";
 import Hero from "./sections/Hero";
 import ScrollExperience from "./components/ScrollExperience";
 import HowItWorks from "./sections/HowItWorks";
+import Product from "./sections/Product";
 import Benefits from "./sections/Benefits";
 import GuestExperience from "./sections/GuestExperience";
 import FAQ from "./sections/FAQ";
@@ -17,6 +18,7 @@ export default function App() {
         <Hero />
         <ScrollExperience />
         <HowItWorks />
+        <Product />
         <Benefits />
         <GuestExperience />
         <FAQ />
