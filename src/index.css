@@ -1,0 +1,189 @@
+:root {
+  --text: #6b6375;
+  --text-h: #08060d;
+  --bg: #fff;
+  --border: #e5e4e7;
+  --code-bg: #f4f3ec;
+  --accent: #aa3bff;
+  --accent-bg: rgba(170, 59, 255, 0.1);
+  --accent-border: rgba(170, 59, 255, 0.5);
+  --social-bg: rgba(244, 243, 236, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #9ca3af;
+    --text-h: #f3f4f6;
+    --bg: #16171d;
+    --border: #2e303a;
+    --code-bg: #1f2028;
+    --accent: #c084fc;
+    --accent-bg: rgba(192, 132, 252, 0.15);
+    --accent-border: rgba(192, 132, 252, 0.5);
+    --social-bg: rgba(47, 48, 58, 0.5);
+    --shadow:
+      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  }
+
+  #social .button-icon {
+    filter: invert(1) brightness(2);
+  }
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  width: 1126px;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  border-inline: 1px solid var(--border);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+h1,
+h2 {
+  font-family: var(--heading);
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+h1 {
+  font-size: 56px;
+  letter-spacing: -1.68px;
+  margin: 32px 0;
+  @media (max-width: 1024px) {
+    font-size: 36px;
+    margin: 20px 0;
+  }
+}
+h2 {
+  font-size: 24px;
+  line-height: 118%;
+  letter-spacing: -0.24px;
+  margin: 0 0 8px;
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
+}
+p {
+  margin: 0;
+}
+
+code,
+.counter {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: 4px;
+  color: var(--text-h);
+}
+
+code {
+  font-size: 15px;
+  line-height: 135%;
+  padding: 4px 8px;
+  background: var(--code-bg);
+}
+
+/* EZinn brand + layout */
+:root {
+  --ez-bg: #EEEEEE;
+  --ez-dark: #283338;
+  --ez-teal: #06858F;
+  --ez-orange: #E8A05B;
+  --ez-white: #FCFCFB;
+}
+
+.app-root {
+  background: var(--ez-bg);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.overlay {
+  position: relative;
+  pointer-events: none;
+}
+
+.topbar {
+  position: fixed;
+  top: 20px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  pointer-events: auto;
+}
+.brand {
+  font-weight: 700;
+  color: var(--ez-dark);
+  font-size: 20px;
+}
+nav { display: flex; gap: 8px; align-items: center; }
+.cta {
+  background: transparent;
+  border: 1px solid rgba(40,51,56,0.08);
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: var(--ez-dark);
+  cursor: pointer;
+}
+.cta.primary {
+  background: var(--ez-teal);
+  color: white;
+  border: none;
+}
+
+.content {
+  position: relative;
+  width: 42%;
+  max-width: 520px;
+  margin-left: auto;
+  padding: 140px 36px 120px 36px;
+  pointer-events: auto;
+}
+.panel { background: rgba(255,255,255,0.85); padding: 28px; border-radius: 12px; margin-bottom: 48px; box-shadow: var(--shadow); }
+.hero h1 { font-size: 28px; color: var(--ez-dark); margin-bottom: 8px; }
+.hero .lede { margin-top: 8px; color: #445557; }
+.flow .steps { list-style: none; padding: 0; margin-top: 16px; }
+.flow .steps li { padding: 12px 14px; border-radius: 8px; margin-bottom: 8px; background: rgba(40,51,56,0.04); display:flex; justify-content:space-between; }
+.flow .steps li.active { background: linear-gradient(90deg,var(--ez-teal),#0aa7a8); color: white; }
+
+.ui { position: fixed; left: 24px; bottom: 24px; pointer-events: auto; display:flex; flex-direction:column; gap:8px; align-items:flex-start }
+.ui .step { background: white; padding: 8px 12px; border-radius: 8px; color: var(--ez-dark); font-weight:600; box-shadow: var(--shadow); }
+.progress-bar { width: 160px; height: 8px; background: rgba(0,0,0,0.06); border-radius: 8px; overflow:hidden; }
+.progress { height: 100%; background: linear-gradient(90deg,var(--ez-teal),var(--ez-orange)); }
+.help { background: var(--ez-white); border-radius: 999px; padding: 8px 12px; border: 1px solid rgba(0,0,0,0.06); }
+
+@media (max-width: 900px) {
+  .content { position: relative; width: auto; max-width: 100%; margin: 120px 20px 80px 20px; }
+  .topbar { left: 12px; right: 12px; }
+  .ui { left: 12px; }
+}
