@@ -86,7 +86,11 @@ a {
 .btn-primary:hover {
   background-color: var(--ez-primary-dark);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(6, 133, 143, 0.35);
+  box-shadow: 0 8px 24px rgba(6, 133, 143, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
 }
 
 .btn-ghost {
@@ -97,8 +101,13 @@ a {
 
 .btn-ghost:hover {
   background-color: rgba(40, 51, 56, 0.05);
-  border-color: rgba(40, 51, 56, 0.25);
+  border-color: var(--ez-primary);
+  color: var(--ez-primary);
   transform: translateY(-2px);
+}
+
+.btn-ghost:active {
+  transform: translateY(0);
 }
 
 .btn-accent {
@@ -107,8 +116,13 @@ a {
 }
 
 .btn-accent:hover {
-  filter: brightness(0.95);
+  filter: brightness(0.92);
   transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(232, 160, 91, 0.3);
+}
+
+.btn-accent:active {
+  transform: translateY(0);
 }
 
 /* Layout Utilities */
@@ -145,24 +159,26 @@ a {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 999;
   padding: 20px 0;
   transition: all 0.3s ease;
+  background-color: transparent;
 }
 
 .navbar.scrolled {
-  background-color: rgba(252, 252, 251, 0.9);
+  background-color: rgba(252, 252, 251, 0.95);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   padding: 14px 0;
   border-bottom: 1px solid var(--ez-border);
-  box-shadow: var(--ez-shadow-sm);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
 .navbar-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 32px;
 }
 
 .brand-logo {
@@ -217,6 +233,24 @@ a {
   border: none;
   cursor: pointer;
   padding: 8px;
+  width: 40px;
+  height: 40px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.mobile-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--ez-dark);
+  transition: all 0.3s ease;
+}
+
+.mobile-toggle:hover span {
+  background: var(--ez-primary);
 }
 
 /* Hero Section */
@@ -224,9 +258,10 @@ a {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: 120px 0 60px;
+  padding: 140px 0 60px;
   position: relative;
   overflow: hidden;
+  margin-top: 0;
 }
 
 .hero-grid {
@@ -351,7 +386,7 @@ a {
 
 .story-sticky-viewport {
   position: sticky;
-  top: 0;
+  top: 80px;
   left: 0;
   width: 100%;
   height: 100vh;
@@ -610,6 +645,17 @@ a {
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.faq-question:hover {
+  background-color: rgba(6, 133, 143, 0.05);
+}
+
+.faq-chevron {
+  display: inline-block;
+  font-size: 1.2rem;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .faq-answer {
@@ -617,6 +663,20 @@ a {
   color: var(--ez-text-muted);
   font-size: 0.975rem;
   line-height: 1.6;
+  animation: faqSlideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes faqSlideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+    overflow: visible;
+  }
 }
 
 /* Support Widget */
@@ -788,19 +848,191 @@ a {
 }
 
 @media (max-width: 768px) {
+  :root {
+    --ez-radius: 10px;
+    --ez-radius-lg: 16px;
+  }
+
   .nav-links {
     display: none;
   }
-  .mobile-toggle {
-    display: block;
+
+  .nav-links.mobile-open {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    background: rgba(252, 252, 251, 0.98);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--ez-border);
+    padding: 16px 0;
+    list-style: none;
+    gap: 0;
+    z-index: 998;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   }
+
+  .nav-links.mobile-open li {
+    border-bottom: 1px solid var(--ez-border);
+  }
+
+  .nav-links.mobile-open li:last-child {
+    border-bottom: none;
+  }
+
+  .nav-links.mobile-open .nav-link {
+    display: block;
+    padding: 12px 24px;
+    color: var(--ez-dark);
+  }
+
+  .mobile-toggle {
+    display: flex;
+  }
+
   .steps-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
+
   .section-title {
     font-size: 2rem;
   }
+
+  .section-padding {
+    padding: 80px 0;
+  }
+
   .cta-section h2 {
     font-size: 2.25rem;
+  }
+
+  .hero-section {
+    padding: 120px 0 40px;
+  }
+
+  .hero-title {
+    font-size: 2.25rem;
+  }
+
+  .hero-grid {
+    gap: 24px;
+  }
+
+  .hero-actions {
+    gap: 12px;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+
+  .btn {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+
+  .story-overlay {
+    padding: 0 16px;
+  }
+
+  .story-card {
+    max-width: calc(100vw - 32px);
+    padding: 24px;
+    margin: 0 auto;
+  }
+
+  .story-card h3 {
+    font-size: 1.5rem;
+  }
+
+  .story-card p {
+    font-size: 0.95rem;
+  }
+
+  .story-sticky-viewport {
+    top: 70px;
+  }
+
+  .step-card {
+    padding: 20px 16px;
+  }
+
+  .step-number {
+    font-size: 2rem;
+  }
+
+  .step-card h4 {
+    font-size: 1.1rem;
+  }
+
+  .navbar-inner {
+    gap: 8px;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .benefit-card {
+    padding: 24px;
+  }
+
+  .faq-grid {
+    max-width: 100%;
+  }
+
+  .faq-question {
+    padding: 16px;
+  }
+
+  .faq-answer {
+    padding: 0 16px 16px;
+  }
+
+  .hero-kiosk-card {
+    padding: 20px;
+  }
+
+  .kiosk-mock-container {
+    max-width: 100%;
+    height: 300px;
+  }
+
+  .experience-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-list {
+    gap: 16px;
+  }
+
+  .feature-item {
+    gap: 12px;
+  }
+
+  .benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .story-progress-indicator {
+    font-size: 0.75rem;
+    padding: 8px 16px;
+    gap: 6px;
+  }
+
+  .story-dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .story-dot.active {
+    width: 16px;
   }
 }

@@ -1,5 +1,13 @@
 
-export default function Hero() {
+export default function Hero({ onDemoClick }) {
+  const handleSeeHowItWorks = (e) => {
+    e.preventDefault();
+    const element = document.getElementById("how-it-works");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section className="hero-section">
       <div className="container hero-grid">
@@ -12,8 +20,8 @@ export default function Hero() {
             EZinn lets guests verify their identity, complete payment, and receive their room key through an intuitive self-service kiosk — eliminating reception queues and front-desk friction.
           </p>
           <div className="hero-actions">
-            <a href="#story" className="btn btn-primary">See How It Works</a>
-            <a href="#request-demo" className="btn btn-ghost">Request a Demo</a>
+            <a href="#how-it-works" className="btn btn-primary" onClick={handleSeeHowItWorks}>See How It Works</a>
+            <a href="#request-demo" className="btn btn-ghost" onClick={(e) => { e.preventDefault(); onDemoClick(); }}>Request a Demo</a>
           </div>
         </div>
 

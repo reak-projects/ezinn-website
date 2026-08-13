@@ -26,6 +26,10 @@ export default function FAQ() {
     }
   ];
 
+  const toggleFaq = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
   return (
     <section id="faq" className="section-padding container">
       <span className="section-tag" style={{ textAlign: "center", display: "block" }}>Got Questions?</span>
@@ -39,10 +43,11 @@ export default function FAQ() {
           <div key={index} className="faq-item">
             <button
               className="faq-question"
-              onClick={() => setOpenIndex(openIndex === index ? null : index)}
+              onClick={() => toggleFaq(index)}
+              aria-expanded={openIndex === index}
             >
               <span>{faq.q}</span>
-              <span style={{ fontSize: "1.2rem", transition: "transform 0.2s ease", transform: openIndex === index ? "rotate(180deg)" : "rotate(0deg)" }}>
+              <span className="faq-chevron" style={{ transform: openIndex === index ? "rotate(180deg)" : "rotate(0deg)" }}>
                 ▼
               </span>
             </button>

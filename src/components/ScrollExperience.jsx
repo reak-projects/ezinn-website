@@ -3,7 +3,7 @@ import { Canvas } from "@react-three/fiber";
 import Scene from "./Scene";
 import { useScrollProgress } from "../hooks/useScrollProgress";
 
-export default function ScrollExperience() {
+export default function ScrollExperience({ onDemoClick }) {
   const containerRef = useRef(null);
   const progress = useScrollProgress(containerRef);
 
@@ -24,6 +24,19 @@ export default function ScrollExperience() {
     if (progress < 0.84) return { title: "Complete Payment", desc: "EMV Chip, Contactless NFC, or Apple Pay processing." };
     return { title: "Get Your Room Key", desc: "Encoded RFID room card dispenses automatically." };
   })();
+
+  const handleSeeHowItWorks = (e) => {
+    e.preventDefault();
+    const element = document.getElementById("how-it-works");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleDemoClick = (e) => {
+    e.preventDefault();
+    onDemoClick();
+  };
 
   return (
     <div id="story" ref={containerRef} className="story-container">
@@ -48,8 +61,8 @@ export default function ScrollExperience() {
                 EZinn lets guests check in, verify their identity, complete payment, and receive their room key through a self-service kiosk.
               </p>
               <div style={{ display: 'flex', gap: '12px' }}>
-                <a href="#how-it-works" className="btn btn-primary" style={{ padding: '10px 18px', fontSize: '0.85rem' }}>See How It Works</a>
-                <a href="#request-demo" className="btn btn-ghost" style={{ padding: '10px 18px', fontSize: '0.85rem' }}>Request a Demo</a>
+                <a href="#how-it-works" className="btn btn-primary" onClick={handleSeeHowItWorks} style={{ padding: '10px 18px', fontSize: '0.85rem' }}>See How It Works</a>
+                <a href="#request-demo" className="btn btn-ghost" onClick={handleDemoClick} style={{ padding: '10px 18px', fontSize: '0.85rem' }}>Request a Demo</a>
               </div>
             </div>
           )}

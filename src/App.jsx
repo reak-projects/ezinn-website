@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./sections/Hero";
 import ScrollExperience from "./components/ScrollExperience";
@@ -9,23 +10,27 @@ import FAQ from "./sections/FAQ";
 import CTA from "./sections/CTA";
 import Footer from "./sections/Footer";
 import SupportWidget from "./components/SupportWidget";
+import DemoModal from "./components/DemoModal";
 
 export default function App() {
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
+
   return (
     <div className="app-root">
-      <Navbar />
+      <Navbar onDemoClick={() => setIsDemoModalOpen(true)} />
       <main>
-        <Hero />
-        <ScrollExperience />
+        <Hero onDemoClick={() => setIsDemoModalOpen(true)} />
+        <ScrollExperience onDemoClick={() => setIsDemoModalOpen(true)} />
         <HowItWorks />
         <Product />
         <Benefits />
         <GuestExperience />
         <FAQ />
-        <CTA />
+        <CTA onDemoClick={() => setIsDemoModalOpen(true)} />
       </main>
       <Footer />
       <SupportWidget />
+      <DemoModal isOpen={isDemoModalOpen} onClose={() => setIsDemoModalOpen(false)} />
     </div>
   );
 }
