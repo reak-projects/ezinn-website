@@ -36,7 +36,7 @@ export default function Product() {
       </p>
 
       {/* Form Factor Model Selector */}
-      <div style={{ display: "flex", justifyContent: "center", gap: "12px", marginBottom: "40px" }}>
+      <div className="product-model-selector" style={{ display: "flex", justifyContent: "center", gap: "12px", marginBottom: "40px" }}>
         <button
           className={`btn ${activeTab === "stand" ? "btn-primary" : "btn-ghost"}`}
           onClick={() => setActiveTab("stand")}
@@ -51,7 +51,7 @@ export default function Product() {
         </button>
       </div>
 
-      <div style={{
+      <div className="product-hardware-shell" style={{
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
         gap: "48px",
@@ -63,7 +63,7 @@ export default function Product() {
         boxShadow: "var(--ez-shadow-lg)"
       }}>
         {/* Hardware Visual Preview */}
-        <div style={{
+        <div className="product-visual-panel" style={{
           position: "relative",
           background: "linear-gradient(180deg, #283338 0%, #1c2428 100%)",
           borderRadius: "16px",
@@ -176,7 +176,7 @@ export default function Product() {
         </div>
 
         {/* Selected Component Description */}
-        <div>
+        <div className="product-info-panel">
           <span style={{
             background: "rgba(6, 133, 143, 0.2)",
             color: "var(--ez-teal-light)",
@@ -195,7 +195,7 @@ export default function Product() {
             {componentsData[activeHotspot].desc}
           </p>
 
-          <div style={{ display: "flex", gap: "12px" }}>
+          <div className="product-component-grid" style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
             {Object.keys(componentsData).map((key) => (
               <button
                 key={key}
