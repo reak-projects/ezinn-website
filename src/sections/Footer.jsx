@@ -5,11 +5,15 @@ export default function Footer() {
       <div className="container">
         <div className="footer-inner">
           <div className="footer-logo">
-            <img
-              src="/logo.png"
-              alt="EZinn Logo"
-              style={{ height: "38px", width: "auto", objectFit: "contain", filter: "brightness(0) invert(1)" }}
-            />
+            <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }} aria-label="EZinn Home">
+              <div className="footer-logo-badge">
+                <img
+                  src="/logo.png"
+                  alt="EZinn Self-Service Kiosk Logo"
+                  className="footer-logo-img"
+                />
+              </div>
+            </a>
           </div>
 
           <ul className="footer-links">

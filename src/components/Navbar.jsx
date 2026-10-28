@@ -56,7 +56,7 @@ export default function Navbar({ onDemoClick }) {
           <img
             src="/logo.png"
             alt="EZinn Self-Service Kiosk Logo"
-            style={{ height: "55px", width: "auto", objectFit: "contain", mixBlendMode: "multiply" }}
+            className="navbar-logo-img"
           />
         </a>
 

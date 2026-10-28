@@ -6,42 +6,50 @@ export default function Product() {
 
   const componentsData = {
     screen: {
+      number: "1",
       title: "15.6 Inch Full HD Touchscreen",
-      desc: "Industrial-grade active matrix display with anti-glare coating, high depth resolution, and multi-touch capabilities for seamless guest interaction.",
-      tag: "Interactive Display"
+      desc: "Industrial-grade portrait active matrix display with anti-glare coating, high depth resolution, and multi-touch capabilities for seamless guest interaction even in bright lobby environments.",
+      tag: "Interactive Display",
+      specs: ["1920 × 1080 Resolution", "Anti-Glare & Fingerprint Resistant", "Integrated HD Camera & Proximity Sensor"]
     },
     scanner: {
+      number: "2",
       title: "Passport & National ID Reader",
-      desc: "Optical OCR scanner with LED landing lights. Reads ICAO-compliant travel documents, passports, and driver's licenses globally in under 2 seconds.",
-      tag: "Identity Verification"
+      desc: "High-precision optical OCR scanner with LED guidance landing lights. Reads ICAO-compliant international travel documents, passports, driver's licenses, and QR booking codes in under 2 seconds.",
+      tag: "Identity Verification",
+      specs: ["ICAO Doc 9303 Compliant", "UV, IR & Visible Light Inspection", "Instant Encrypted OCR Extraction"]
     },
     payment: {
+      number: "3",
       title: "PCI-PTS EMV & NFC Payment Terminal",
-      desc: "Full PCI compliance supporting Chip & PIN, contactless NFC, Apple Pay, Google Wallet, and automated pre-authorizations.",
-      tag: "Secure Transactions"
+      desc: "Bank-grade certified payment hardware supporting Chip & PIN, contactless NFC, Apple Pay, Google Wallet, and automated pre-authorizations directly integrated into your hotel PMS.",
+      tag: "Secure Transactions",
+      specs: ["PCI-PTS 5.x Certified", "Contactless EMV & Mobile Wallets", "End-to-End P2PE Encryption"]
     },
     keycard: {
+      number: "4",
       title: "Automatic RFID Keycard Dispenser",
-      desc: "High-capacity smart card encoder and dispenser with dual-hopper storage and automatic card capture function.",
-      tag: "Key Issuance"
+      desc: "High-capacity smart card encoder and dispenser with dual-hopper storage and automatic card capture function. Encodes and dispenses room keys into the guest's hands in under 3 seconds.",
+      tag: "Key Issuance",
+      specs: ["High-Capacity Dual Hopper (200+ cards)", "MIFARE & RFID Standards", "Motorized Card Encoder & Ejector"]
     }
   };
 
   return (
     <section id="product" className="section-padding container">
-      <span className="section-tag" style={{ color: "var(--ez-teal-secondary)" }}>Hardware Architecture</span>
+      <span className="section-tag">Hardware Architecture</span>
       <h2 className="section-title">Designed for Durability &amp; Style</h2>
       <p className="section-subtitle">
-        High-grade components engineered for zero-downtime hotel lobby operations and effortless maintenance.
+        Enterprise-grade hospitality hardware engineered for zero-downtime lobby operations and effortless maintenance.
       </p>
 
       {/* Form Factor Model Selector */}
-      <div className="product-model-selector" style={{ display: "flex", justifyContent: "center", gap: "12px", marginBottom: "40px" }}>
+      <div className="product-model-selector">
         <button
           className={`btn ${activeTab === "stand" ? "btn-primary" : "btn-ghost"}`}
           onClick={() => setActiveTab("stand")}
         >
-          EZinn Stand Model
+          EZinn Stand Model (Flagship)
         </button>
         <button
           className={`btn ${activeTab === "compact" ? "btn-primary" : "btn-ghost"}`}
@@ -51,167 +59,130 @@ export default function Product() {
         </button>
       </div>
 
-      <div className="product-hardware-shell" style={{
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        gap: "48px",
-        alignItems: "center",
-        background: "var(--ez-shadow-dark)",
-        color: "var(--ez-white)",
-        borderRadius: "var(--ez-radius-lg)",
-        padding: "48px",
-        boxShadow: "var(--ez-shadow-lg)"
-      }}>
-        {/* Hardware Visual Preview */}
-        <div className="product-visual-panel" style={{
-          position: "relative",
-          background: "linear-gradient(180deg, #283338 0%, #1c2428 100%)",
-          borderRadius: "16px",
-          padding: "36px",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          border: "1px solid rgba(255,255,255,0.08)"
-        }}>
-          <div style={{
-            width: activeTab === "stand" ? "220px" : "260px",
-            height: activeTab === "stand" ? "360px" : "240px",
-            background: "#111827",
-            borderRadius: "12px",
-            border: "2px solid var(--ez-primary)",
-            padding: "16px",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "space-between",
-            boxShadow: "0 0 25px rgba(6, 133, 143, 0.3)"
-          }}>
-            {/* Screen Hotspot */}
-            <div
-              onClick={() => setActiveHotspot("screen")}
-              style={{
-                width: "100%",
-                height: "120px",
-                background: activeHotspot === "screen" ? "var(--ez-primary)" : "var(--ez-teal-secondary)",
-                borderRadius: "8px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                cursor: "pointer",
-                border: activeHotspot === "screen" ? "2px solid var(--ez-accent)" : "none",
-                transition: "all 0.2s ease"
-              }}
-            >
-              <span style={{ fontSize: "0.8rem", fontWeight: 700, color: "#FFF" }}>
-                15.6 Inch Touchscreen
-              </span>
-            </div>
+      <div className="product-hardware-shell">
+        {/* Hardware Visual Stage */}
+        <div className="product-visual-panel">
+          {activeTab === "stand" ? (
+            <div className="product-kiosk-stage">
+              <div className="product-image-container">
+                <img
+                  src="/ezinn-machine.jpg"
+                  alt="EZinn Standing Kiosk Product Hardware"
+                  className="product-kiosk-img"
+                />
 
-            {/* Passport Reader Hotspot */}
-            <div
-              onClick={() => setActiveHotspot("scanner")}
-              style={{
-                width: "90%",
-                height: "32px",
-                background: activeHotspot === "scanner" ? "var(--ez-accent)" : "#283338",
-                borderRadius: "6px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                cursor: "pointer",
-                border: "1px solid rgba(255,255,255,0.1)",
-                color: activeHotspot === "scanner" ? "var(--ez-dark)" : "#ADC7CA",
-                fontSize: "0.75rem",
-                fontWeight: 600
-              }}
-            >
-              Passport / ID Reader
-            </div>
+                {/* Hotspot 1: 15.6" Touchscreen */}
+                <button
+                  type="button"
+                  className={`hotspot-btn ${activeHotspot === "screen" ? "active" : ""}`}
+                  style={{ top: "25%", left: "50%" }}
+                  onClick={() => setActiveHotspot("screen")}
+                  aria-label="15.6 Inch Touchscreen"
+                >
+                  <span className="hotspot-pulse"></span>
+                  <span className="hotspot-number">1</span>
+                </button>
 
-            {/* Payment Terminal Hotspot */}
-            <div
-              onClick={() => setActiveHotspot("payment")}
-              style={{
-                width: "85%",
-                height: "36px",
-                background: activeHotspot === "payment" ? "var(--ez-accent)" : "#1F2937",
-                borderRadius: "6px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                cursor: "pointer",
-                border: "1px solid rgba(255,255,255,0.1)",
-                color: activeHotspot === "payment" ? "var(--ez-dark)" : "#ADC7CA",
-                fontSize: "0.75rem",
-                fontWeight: 600
-              }}
-            >
-              EMV Payment &amp; NFC
-            </div>
+                {/* Hotspot 2: Passport / ID Scanner */}
+                <button
+                  type="button"
+                  className={`hotspot-btn ${activeHotspot === "scanner" ? "active" : ""}`}
+                  style={{ top: "42%", left: "47%" }}
+                  onClick={() => setActiveHotspot("scanner")}
+                  aria-label="Passport & ID Scanner"
+                >
+                  <span className="hotspot-pulse"></span>
+                  <span className="hotspot-number">2</span>
+                </button>
 
-            {/* Key Dispenser Hotspot */}
-            <div
-              onClick={() => setActiveHotspot("keycard")}
-              style={{
-                width: "70%",
-                height: "28px",
-                background: activeHotspot === "keycard" ? "var(--ez-accent)" : "#111827",
-                borderRadius: "6px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                cursor: "pointer",
-                border: "1px solid rgba(255,255,255,0.1)",
-                color: activeHotspot === "keycard" ? "var(--ez-dark)" : "#ADC7CA",
-                fontSize: "0.75rem",
-                fontWeight: 600
-              }}
-            >
-              RFID Key Dispenser
+                {/* Hotspot 3: Payment Terminal */}
+                <button
+                  type="button"
+                  className={`hotspot-btn ${activeHotspot === "payment" ? "active" : ""}`}
+                  style={{ top: "42%", left: "57%" }}
+                  onClick={() => setActiveHotspot("payment")}
+                  aria-label="EMV & Contactless Payment"
+                >
+                  <span className="hotspot-pulse"></span>
+                  <span className="hotspot-number">3</span>
+                </button>
+
+                {/* Hotspot 4: Room Key Dispenser */}
+                <button
+                  type="button"
+                  className={`hotspot-btn ${activeHotspot === "keycard" ? "active" : ""}`}
+                  style={{ top: "53%", left: "54%" }}
+                  onClick={() => setActiveHotspot("keycard")}
+                  aria-label="RFID Keycard Dispenser"
+                >
+                  <span className="hotspot-pulse"></span>
+                  <span className="hotspot-number">4</span>
+                </button>
+              </div>
+
+              <p className="hotspot-instruction">
+                Click numbered hotspots on the kiosk to inspect hardware components
+              </p>
             </div>
-          </div>
-          <p style={{ marginTop: "16px", fontSize: "0.8rem", color: "var(--ez-teal-light)", opacity: 0.8 }}>
-            Click components on the diagram to inspect details
-          </p>
+          ) : (
+            <div className="compact-kiosk-stage">
+              <div className="compact-kiosk-card">
+                <div className="compact-badge">Countertop Edition</div>
+                <div className="compact-icon-wrap">
+                  <div className="compact-graphic">
+                    <div className="compact-graphic-screen">
+                      <img src="/logo.png" alt="EZinn" style={{ height: "18px", width: "auto" }} />
+                    </div>
+                    <div className="compact-graphic-base"></div>
+                  </div>
+                </div>
+                <h4>Compact Reception Footprint</h4>
+                <p>
+                  Engineered for boutique hotels and space-conscious reception desks. Mounts directly to front desk counters or tabletops with identical processing power and verification security.
+                </p>
+                <div className="compact-spec-pill">Requires only 24″ × 18″ Counter Space</div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Selected Component Description */}
         <div className="product-info-panel">
-          <span style={{
-            background: "rgba(6, 133, 143, 0.2)",
-            color: "var(--ez-teal-light)",
-            padding: "4px 12px",
-            borderRadius: "6px",
-            fontSize: "0.8rem",
-            fontWeight: 700,
-            textTransform: "uppercase"
-          }}>
-            {componentsData[activeHotspot].tag}
-          </span>
-          <h3 style={{ color: "var(--ez-white)", fontSize: "2rem", margin: "16px 0 12px" }}>
+          <div className="product-info-header">
+            <span className="product-tag">{componentsData[activeHotspot].tag}</span>
+            <span className="product-hotspot-num">Module #{componentsData[activeHotspot].number}</span>
+          </div>
+
+          <h3 className="product-component-title">
             {componentsData[activeHotspot].title}
           </h3>
-          <p style={{ color: "rgba(252,252,251,0.8)", fontSize: "1.1rem", lineHeight: "1.6", marginBottom: "28px" }}>
+
+          <p className="product-component-desc">
             {componentsData[activeHotspot].desc}
           </p>
 
-          <div className="product-component-grid" style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+          <div className="product-spec-list">
+            <h5 className="product-spec-heading">Engineering Highlights</h5>
+            <ul>
+              {componentsData[activeHotspot].specs.map((spec, i) => (
+                <li key={i}>
+                  <span className="spec-check">✓</span>
+                  <span>{spec}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="product-selector-tabs">
             {Object.keys(componentsData).map((key) => (
               <button
                 key={key}
+                type="button"
                 onClick={() => setActiveHotspot(key)}
-                style={{
-                  padding: "8px 14px",
-                  borderRadius: "8px",
-                  border: activeHotspot === key ? "1px solid var(--ez-accent)" : "1px solid rgba(255,255,255,0.1)",
-                  background: activeHotspot === key ? "var(--ez-accent)" : "transparent",
-                  color: activeHotspot === key ? "var(--ez-dark)" : "var(--ez-white)",
-                  fontSize: "0.825rem",
-                  fontWeight: 600,
-                  cursor: "pointer"
-                }}
+                className={`product-spec-tab ${activeHotspot === key ? "active" : ""}`}
               >
-                {key.toUpperCase()}
+                <span className="tab-num">{componentsData[key].number}</span>
+                <span className="tab-name">{key === "keycard" ? "Keycard" : key.charAt(0).toUpperCase() + key.slice(1)}</span>
               </button>
             ))}
           </div>
