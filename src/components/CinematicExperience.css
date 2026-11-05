@@ -118,17 +118,34 @@
   top: 24px;
   left: 24px;
   z-index: 1;
-  padding: 10px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.08);
+  min-height: 44px;
+  padding: 10px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 9px;
+  background: var(--ez-primary-dark);
+  box-shadow: 0 4px 14px rgba(32, 40, 44, 0.18);
   color: #fff;
-  font: inherit;
+  font: 600 0.86rem / 1.2 var(--ez-font);
   cursor: pointer;
+  transition: background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
 
 .simulator-return:hover {
-  background: rgba(255, 255, 255, 0.16);
+  transform: translateY(-1px);
+  background: var(--ez-dark);
+  box-shadow: 0 6px 16px rgba(32, 40, 44, 0.22);
+}
+
+.simulator-return:active {
+  transform: translateY(0);
+  background: var(--ez-primary-dark);
+  box-shadow: 0 2px 8px rgba(32, 40, 44, 0.18);
+}
+
+.simulator-return:focus-visible {
+  outline: 2px solid var(--ez-white);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 5px rgba(0, 112, 122, 0.3);
 }
 
 @media (max-width: 767px) {
@@ -145,12 +162,16 @@
   .simulator-return {
     top: 12px;
     left: 12px;
+    min-height: 44px;
+    padding: 10px 13px;
+    font-size: 0.82rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .cinematic-cta,
-  .cinematic-skip {
+  .cinematic-skip,
+  .simulator-return {
     transition: none;
   }
 }
