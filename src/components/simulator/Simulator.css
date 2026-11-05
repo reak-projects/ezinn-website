@@ -1,0 +1,1190 @@
+.simulator-mount {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: #f3f5f4;
+  color: var(--ez-dark);
+}
+
+.ez-simulator {
+  --sim-ink: #263438;
+  --sim-muted: #708084;
+  --sim-line: rgba(38, 52, 56, 0.12);
+  --sim-paper: #fff;
+  --sim-teal: #087f83;
+  --sim-teal-dark: #07696d;
+  --sim-gold: #c29a62;
+  min-height: 100%;
+  padding: clamp(72px, 8vh, 104px) clamp(18px, 4vw, 64px) 28px;
+  background:
+    radial-gradient(ellipse at 50% -18%, rgba(178, 221, 226, 0.52), transparent 48%),
+    #f3f5f4;
+  color: var(--sim-ink);
+  font-family: var(--ez-font);
+}
+
+.simulator-shell {
+  display: flex;
+  width: min(100%, 980px);
+  min-height: calc(100dvh - clamp(72px, 8vh, 104px) - 28px);
+  margin: 0 auto;
+  flex-direction: column;
+}
+
+.sim-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 16px;
+  min-height: 48px;
+  margin-bottom: clamp(24px, 4vh, 40px);
+}
+
+.sim-brand {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  border-radius: 6px;
+}
+
+.sim-brand img {
+  display: block;
+  width: clamp(78px, 9vw, 110px);
+  height: auto;
+}
+
+.sim-header-context {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.sim-header-title {
+  color: var(--sim-muted);
+  font-size: 0.84rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+.sim-demo-badge {
+  padding: 5px 8px;
+  border: 1px solid rgba(194, 154, 98, 0.32);
+  border-radius: 999px;
+  background: rgba(194, 154, 98, 0.1);
+  color: #80613a;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  white-space: nowrap;
+}
+
+.sim-header-action {
+  justify-self: end;
+}
+
+.sim-header-spacer {
+  min-width: 1px;
+}
+
+.sim-text-button,
+.sim-exit-link {
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--sim-muted);
+  font: inherit;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: color 160ms ease, background 160ms ease;
+}
+
+.sim-text-button:hover,
+.sim-exit-link:hover {
+  background: rgba(8, 127, 131, 0.08);
+  color: var(--sim-teal-dark);
+}
+
+.sim-text-button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.sim-progress {
+  width: min(100%, 720px);
+  margin: 0 auto clamp(20px, 3vh, 32px);
+}
+
+.sim-progress-track {
+  height: 3px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: rgba(38, 52, 56, 0.12);
+}
+
+.sim-progress-fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--sim-teal);
+  transition: width 350ms ease;
+}
+
+.sim-progress-labels {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.sim-progress-labels li {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 7px;
+  color: #8b9698;
+  font-size: 0.75rem;
+  transition: color 180ms ease;
+}
+
+.sim-progress-labels li.is-current,
+.sim-progress-labels li.is-complete {
+  color: var(--sim-teal-dark);
+}
+
+.sim-progress-number {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  place-items: center;
+  border: 1px solid var(--sim-line);
+  border-radius: 50%;
+  background: #f3f5f4;
+  color: inherit;
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.is-current .sim-progress-number,
+.is-complete .sim-progress-number {
+  border-color: var(--sim-teal);
+  background: var(--sim-teal);
+  color: #fff;
+}
+
+.sim-progress-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.simulator-content {
+  display: grid;
+  width: min(100%, 720px);
+  flex: 1 0 auto;
+  margin: 0 auto;
+  place-items: center;
+}
+
+.sim-screen {
+  width: 100%;
+  padding: clamp(26px, 5vw, 56px);
+  border: 1px solid rgba(38, 52, 56, 0.07);
+  border-radius: 18px;
+  background: var(--sim-paper);
+  box-shadow: 0 16px 54px rgba(37, 55, 58, 0.08), 0 2px 8px rgba(37, 55, 58, 0.035);
+  animation: simScreenEnter 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.sim-screen-heading {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.sim-screen-heading h1 {
+  margin-bottom: 10px;
+  color: var(--sim-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.75rem, 3.5vw, 2.45rem);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+}
+
+.sim-screen-heading p {
+  max-width: 520px;
+  margin: 0 auto;
+  color: var(--sim-muted);
+  font-size: clamp(0.92rem, 1.5vw, 1.02rem);
+  line-height: 1.65;
+}
+
+.sim-welcome-mark {
+  display: grid;
+  width: 58px;
+  height: 58px;
+  margin: -4px auto 10px;
+  place-items: center;
+  border: 1px solid rgba(8, 127, 131, 0.2);
+  border-radius: 50%;
+  background: #f1f8f7;
+  color: var(--sim-teal);
+}
+
+.sim-welcome-mark span {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2.1rem;
+  font-style: italic;
+  line-height: 1;
+}
+
+.sim-welcome-note {
+  margin-bottom: 24px;
+  color: var(--sim-muted);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  font-style: italic;
+  text-align: center;
+}
+
+.sim-journey-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.sim-journey-card {
+  position: relative;
+  display: flex;
+  min-height: 176px;
+  padding: 22px;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid var(--sim-line);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--sim-ink);
+  text-align: left;
+  cursor: pointer;
+  transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.sim-journey-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(8, 127, 131, 0.5);
+  box-shadow: 0 12px 26px rgba(37, 55, 58, 0.08);
+}
+
+.sim-journey-icon {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 20px;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(8, 127, 131, 0.1);
+  color: var(--sim-teal);
+  font-size: 1.25rem;
+}
+
+.sim-journey-icon-warm {
+  background: rgba(194, 154, 98, 0.13);
+  color: #9c7647;
+}
+
+.sim-journey-title {
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+}
+
+.sim-journey-description {
+  margin-top: 6px;
+  color: var(--sim-muted);
+  font-size: 0.85rem;
+}
+
+.sim-journey-arrow {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  color: var(--sim-teal);
+  font-size: 1.15rem;
+}
+
+.sim-exit-link {
+  display: block;
+  margin: 18px auto -12px;
+}
+
+.sim-form {
+  display: grid;
+  gap: 18px;
+}
+
+.sim-field {
+  display: grid;
+  gap: 8px;
+}
+
+.sim-field label {
+  color: var(--sim-ink);
+  font-size: 0.86rem;
+  font-weight: 650;
+}
+
+.sim-field input {
+  width: 100%;
+  min-height: 56px;
+  padding: 14px 16px;
+  border: 1px solid rgba(38, 52, 56, 0.17);
+  border-radius: 8px;
+  outline: none;
+  background: #fcfdfc;
+  color: var(--sim-ink);
+  font: inherit;
+  font-size: 1rem;
+  transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.sim-field input::placeholder {
+  color: #9aa4a5;
+}
+
+.sim-field input:focus {
+  border-color: var(--sim-teal);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(8, 127, 131, 0.11);
+}
+
+.sim-field input[aria-invalid="true"] {
+  border-color: #b7473d;
+}
+
+.sim-field-error,
+.sim-alert {
+  color: #a53d34;
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.sim-alert {
+  padding: 12px 14px;
+  border: 1px solid rgba(183, 71, 61, 0.18);
+  border-radius: 8px;
+  background: #fff6f4;
+}
+
+.sim-field-divider {
+  position: relative;
+  display: grid;
+  height: 1px;
+  place-items: center;
+  background: var(--sim-line);
+}
+
+.sim-field-divider span {
+  padding: 0 12px;
+  background: #fff;
+  color: #929d9e;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.sim-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.sim-actions > span {
+  flex: 1;
+}
+
+.sim-button {
+  display: inline-flex;
+  min-height: 52px;
+  padding: 13px 20px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.sim-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.sim-button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.sim-button-primary {
+  border-color: var(--sim-teal);
+  background: var(--sim-teal);
+  box-shadow: 0 5px 14px rgba(8, 127, 131, 0.16);
+  color: #fff;
+}
+
+.sim-button-primary:hover:not(:disabled) {
+  border-color: var(--sim-teal-dark);
+  background: var(--sim-teal-dark);
+}
+
+.sim-button-secondary {
+  border-color: var(--sim-line);
+  background: #fff;
+  color: var(--sim-ink);
+}
+
+.sim-button-secondary:hover:not(:disabled) {
+  border-color: rgba(8, 127, 131, 0.35);
+  background: #f8fbfa;
+}
+
+.sim-button-full {
+  width: 100%;
+  margin-top: 18px;
+}
+
+.sim-demo-hint,
+.sim-privacy-note {
+  margin-top: 20px;
+  color: var(--sim-muted);
+  font-size: 0.79rem;
+  line-height: 1.55;
+  text-align: center;
+}
+
+.sim-demo-hint span {
+  margin-right: 5px;
+  color: var(--sim-teal);
+}
+
+.sim-demo-fill {
+  display: flex;
+  width: 100%;
+  min-height: 52px;
+  margin-top: -3px;
+  padding: 11px 14px;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(8, 127, 131, 0.18);
+  border-radius: 8px;
+  background: #f3f9f8;
+  color: #53686a;
+  font: inherit;
+  font-size: 0.82rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.sim-demo-fill:hover {
+  transform: translateY(-1px);
+  border-color: rgba(8, 127, 131, 0.42);
+  background: #eaf5f3;
+  box-shadow: 0 4px 12px rgba(8, 127, 131, 0.08);
+}
+
+.sim-demo-fill:active {
+  transform: translateY(0);
+  background: #e3f0ee;
+}
+
+.sim-demo-fill:focus-visible {
+  outline: 3px solid rgba(8, 127, 131, 0.3);
+  outline-offset: 3px;
+}
+
+.sim-demo-fill-icon {
+  display: grid;
+  width: 26px;
+  height: 26px;
+  flex: 0 0 26px;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(8, 127, 131, 0.11);
+  color: var(--sim-teal);
+  font-size: 0.82rem;
+}
+
+.sim-demo-fill strong {
+  color: var(--sim-teal-dark);
+  font-weight: 750;
+}
+
+.sim-demo-fill-arrow {
+  margin-left: auto;
+  color: var(--sim-teal);
+  font-size: 1rem;
+}
+
+.sim-demo-loaded {
+  margin-top: -9px;
+  color: var(--sim-teal-dark);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.sim-detail-card {
+  padding: 20px;
+  border: 1px solid var(--sim-line);
+  border-radius: 10px;
+  background: #fcfdfc;
+}
+
+.sim-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 24px;
+}
+
+.sim-detail-grid div {
+  min-width: 0;
+}
+
+.sim-detail-grid dt {
+  margin-bottom: 5px;
+  color: var(--sim-muted);
+  font-size: 0.73rem;
+  letter-spacing: 0.04em;
+}
+
+.sim-detail-grid dd {
+  color: var(--sim-ink);
+  font-size: 0.96rem;
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+
+.sim-privacy-note {
+  margin: 16px 0 22px;
+}
+
+.sim-verified-guest {
+  display: flex;
+  padding: 20px;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid var(--sim-line);
+  border-radius: 10px;
+  background: #fcfdfc;
+}
+
+.sim-avatar {
+  display: grid;
+  width: 54px;
+  height: 54px;
+  flex: 0 0 54px;
+  place-items: center;
+  border-radius: 50%;
+  background: #e9f3f1;
+  color: var(--sim-teal-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.2rem;
+}
+
+.sim-verified-guest > div {
+  display: grid;
+  gap: 4px;
+}
+
+.sim-verified-guest strong {
+  color: var(--sim-ink);
+  font-size: 1rem;
+}
+
+.sim-verified-guest > div > span:last-child {
+  color: var(--sim-muted);
+  font-size: 0.84rem;
+}
+
+.sim-overline {
+  color: var(--sim-muted);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.sim-demo-notice {
+  display: flex;
+  margin: 18px 0 20px;
+  padding: 14px 16px;
+  align-items: flex-start;
+  gap: 11px;
+  border: 1px solid rgba(194, 154, 98, 0.22);
+  border-radius: 9px;
+  background: #fcf8f1;
+}
+
+.sim-notice-icon {
+  display: grid;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  place-items: center;
+  border: 1px solid rgba(128, 97, 58, 0.5);
+  border-radius: 50%;
+  color: #80613a;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.sim-demo-notice p {
+  color: #76644b;
+  font-size: 0.83rem;
+  line-height: 1.55;
+}
+
+.sim-demo-notice strong {
+  color: #5c482e;
+}
+
+.sim-room-card {
+  display: flex;
+  min-height: 190px;
+  padding: 24px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(8, 127, 131, 0.16);
+  border-radius: 12px;
+  background:
+    linear-gradient(140deg, rgba(255, 255, 255, 0.82), rgba(235, 246, 244, 0.8)),
+    #f0f7f5;
+  text-align: center;
+}
+
+.sim-room-number {
+  margin: 8px 0 3px;
+  color: var(--sim-teal-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3.2rem, 8vw, 4.5rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.sim-room-type {
+  color: var(--sim-ink);
+  font-size: 1rem;
+  font-weight: 650;
+}
+
+.sim-room-caption {
+  margin-top: 6px;
+  color: var(--sim-muted);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.sim-room-card-success {
+  min-height: 160px;
+}
+
+.sim-success-mark {
+  display: grid;
+  width: 58px;
+  height: 58px;
+  margin: -6px auto 18px;
+  place-items: center;
+  border: 1px solid rgba(8, 127, 131, 0.16);
+  border-radius: 50%;
+  background: #eaf5f2;
+  color: var(--sim-teal);
+  font-size: 1.6rem;
+}
+
+.sim-access-card {
+  margin-top: 14px;
+  padding: 16px 18px;
+  border: 1px solid var(--sim-line);
+  border-radius: 9px;
+  background: #fff;
+}
+
+.sim-access-card p {
+  margin-top: 7px;
+  color: var(--sim-muted);
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
+.simulator-content:has(.sim-success-mark) .sim-screen-heading {
+  margin-bottom: 22px;
+}
+
+.sim-charge-list {
+  display: grid;
+  gap: 12px;
+  margin: 18px 0 22px;
+}
+
+.sim-charge-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--sim-muted);
+  font-size: 0.87rem;
+}
+
+.sim-charge-row span:last-child {
+  flex: 0 0 auto;
+  color: var(--sim-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.sim-charge-total {
+  margin-top: 5px;
+  padding-top: 14px;
+  border-top: 1px solid var(--sim-line);
+  color: var(--sim-ink);
+  font-weight: 750;
+}
+
+.sim-charge-total span {
+  color: var(--sim-ink);
+}
+
+.sim-payment-options {
+  display: grid;
+  gap: 10px;
+  padding: 0;
+  border: 0;
+}
+
+.sim-payment-options legend {
+  margin-bottom: 12px;
+  color: var(--sim-ink);
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.sim-payment-option {
+  display: flex;
+  min-height: 68px;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 13px;
+  border: 1px solid var(--sim-line);
+  border-radius: 9px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+
+.sim-payment-option:hover,
+.sim-payment-option.is-selected {
+  border-color: rgba(8, 127, 131, 0.5);
+  background: #f5faf9;
+}
+
+.sim-payment-option input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+.sim-payment-option input:focus-visible + .sim-radio-indicator {
+  outline: 3px solid rgba(8, 127, 131, 0.24);
+  outline-offset: 3px;
+}
+
+.sim-radio-indicator {
+  display: grid;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  place-items: center;
+  border: 1px solid rgba(38, 52, 56, 0.28);
+  border-radius: 50%;
+  background: #fff;
+}
+
+.sim-payment-option input:checked + .sim-radio-indicator {
+  border: 6px solid var(--sim-teal);
+}
+
+.sim-payment-copy {
+  display: grid;
+  gap: 4px;
+}
+
+.sim-payment-copy strong {
+  color: var(--sim-ink);
+  font-size: 0.9rem;
+}
+
+.sim-payment-copy > span {
+  color: var(--sim-muted);
+  font-size: 0.77rem;
+}
+
+.sim-payment-total {
+  display: flex;
+  margin: 20px 0;
+  padding: 16px 0;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--sim-line);
+  border-bottom: 1px solid var(--sim-line);
+  color: var(--sim-muted);
+  font-size: 0.9rem;
+}
+
+.sim-payment-total strong {
+  color: var(--sim-ink);
+  font-size: 1.2rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.sim-receipt {
+  padding: 20px;
+  border: 1px solid var(--sim-line);
+  border-radius: 10px;
+  background: #fcfdfc;
+}
+
+.sim-receipt-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.sim-receipt-heading > div {
+  display: grid;
+  gap: 6px;
+}
+
+.sim-receipt-heading strong {
+  color: var(--sim-ink);
+  font-size: 1.05rem;
+}
+
+.sim-receipt-status {
+  padding: 5px 8px;
+  border-radius: 4px;
+  background: rgba(194, 154, 98, 0.14);
+  color: #80613a;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.sim-receipt-meta {
+  margin-top: 4px;
+  color: var(--sim-muted);
+  font-size: 0.8rem;
+}
+
+.sim-receipt .sim-charge-list {
+  margin-bottom: 12px;
+}
+
+.sim-receipt-note {
+  padding-top: 12px;
+  border-top: 1px dashed var(--sim-line);
+  color: var(--sim-muted);
+  font-size: 0.76rem;
+  text-align: center;
+}
+
+.simulator-footer {
+  display: flex;
+  margin: 24px auto 14px;
+  justify-content: center;
+  gap: 8px;
+  color: #849092;
+  font-size: 0.72rem;
+  text-align: center;
+}
+
+.simulator-footer span + span::before {
+  margin-right: 8px;
+  content: "·";
+}
+
+.sim-credentials {
+  width: min(100%, 720px);
+  margin: 0 auto 10px;
+  border-top: 1px solid rgba(38, 52, 56, 0.1);
+  color: var(--sim-muted);
+  font-size: 0.78rem;
+}
+
+.sim-credentials summary {
+  width: fit-content;
+  min-height: 44px;
+  padding: 12px 2px;
+  color: var(--sim-teal-dark);
+  cursor: pointer;
+}
+
+.sim-credentials-content > p {
+  margin-bottom: 12px;
+  line-height: 1.55;
+}
+
+.sim-credential-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  padding-bottom: 14px;
+}
+
+.sim-credential {
+  display: grid;
+  min-width: 0;
+  gap: 5px;
+  padding: 12px;
+  border: 1px solid var(--sim-line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.7);
+  overflow-wrap: anywhere;
+}
+
+.sim-credential strong {
+  margin-bottom: 2px;
+  color: var(--sim-ink);
+}
+
+.sim-credential code {
+  color: var(--sim-teal-dark);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.74rem;
+}
+
+.sim-text-button:focus-visible,
+.sim-exit-link:focus-visible,
+.sim-journey-card:focus-visible,
+.sim-button:focus-visible,
+.sim-credentials summary:focus-visible {
+  outline: 3px solid rgba(8, 127, 131, 0.34);
+  outline-offset: 3px;
+}
+
+@keyframes simScreenEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 1500px) {
+  .simulator-shell {
+    width: min(100%, 1100px);
+  }
+
+  .simulator-content,
+  .sim-progress,
+  .sim-credentials {
+    width: min(100%, 820px);
+  }
+
+  .sim-screen {
+    padding: 64px;
+  }
+}
+
+@media (max-width: 767px) {
+  .simulator-mount {
+    width: 100%;
+    min-height: 100%;
+  }
+
+  .ez-simulator {
+    min-height: 100dvh;
+    padding: 72px 16px 18px;
+  }
+
+  .simulator-shell {
+    min-height: calc(100dvh - 90px);
+  }
+
+  .sim-header {
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+
+  .sim-brand {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .sim-header-context {
+    grid-column: 2;
+    grid-row: 1;
+    justify-content: flex-end;
+    gap: 7px;
+  }
+
+  .sim-header-title {
+    font-size: 0.73rem;
+  }
+
+  .sim-demo-badge {
+    padding: 4px 6px;
+    font-size: 0.55rem;
+  }
+
+  .sim-header-action {
+    position: absolute;
+    top: 112px;
+    right: 16px;
+  }
+
+  .sim-header:has(.sim-header-action) {
+    margin-bottom: 64px;
+  }
+
+  .sim-progress {
+    margin-bottom: 20px;
+  }
+
+  .sim-progress-labels {
+    gap: 2px;
+  }
+
+  .sim-progress-labels li {
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+  }
+
+  .sim-progress-label {
+    max-width: 68px;
+    font-size: 0.62rem;
+  }
+
+  .simulator-content {
+    width: 100%;
+    place-items: start center;
+  }
+
+  .sim-screen {
+    padding: 26px 20px;
+    border-radius: 14px;
+  }
+
+  .sim-screen-heading {
+    margin-bottom: 24px;
+  }
+
+  .sim-journey-options {
+    grid-template-columns: 1fr;
+  }
+
+  .sim-journey-card {
+    min-height: 142px;
+    padding: 18px;
+  }
+
+  .sim-journey-icon {
+    width: 34px;
+    height: 34px;
+    margin-bottom: 13px;
+  }
+
+  .sim-detail-card {
+    padding: 16px;
+  }
+
+  .sim-detail-grid {
+    gap: 17px 14px;
+  }
+
+  .sim-detail-grid dd {
+    font-size: 0.87rem;
+  }
+
+  .sim-button {
+    min-height: 50px;
+    padding: 12px 14px;
+    font-size: 0.84rem;
+  }
+
+  .sim-actions {
+    gap: 8px;
+  }
+
+  .sim-credential-list {
+    grid-template-columns: 1fr;
+  }
+
+  .simulator-footer {
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .simulator-footer span + span::before {
+    content: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .sim-header-context {
+    gap: 5px;
+  }
+
+  .sim-header-title {
+    max-width: 94px;
+    font-size: 0.67rem;
+  }
+
+  .sim-screen {
+    padding: 22px 16px;
+  }
+
+  .sim-progress-label {
+    max-width: 54px;
+    font-size: 0.57rem;
+  }
+
+  .sim-progress-number {
+    width: 22px;
+    height: 22px;
+    flex-basis: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sim-screen {
+    animation: none;
+  }
+
+  .sim-progress-fill,
+  .sim-journey-card,
+  .sim-button,
+  .sim-text-button,
+  .sim-exit-link {
+    transition: none;
+  }
+}

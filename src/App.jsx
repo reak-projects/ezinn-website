@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./sections/Hero";
-import ScrollExperience from "./components/ScrollExperience";
+import CinematicExperience from "./components/CinematicExperience";
 import HowItWorks from "./sections/HowItWorks";
 import Product from "./sections/Product";
 import Benefits from "./sections/Benefits";
@@ -20,7 +20,7 @@ export default function App() {
       <Navbar onDemoClick={() => setIsDemoModalOpen(true)} />
       <main>
         <Hero onDemoClick={() => setIsDemoModalOpen(true)} />
-        <ScrollExperience onDemoClick={() => setIsDemoModalOpen(true)} />
+        <CinematicExperience />
         <HowItWorks />
         <Product />
         <Benefits />
