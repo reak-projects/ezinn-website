@@ -25,6 +25,42 @@
   object-fit: contain;
 }
 
+.cinematic-skip {
+  position: absolute;
+  top: clamp(12px, 2.2vw, 28px);
+  right: clamp(12px, 2.2vw, 28px);
+  z-index: 2;
+  display: inline-flex;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 11px 16px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  border-radius: 999px;
+  background: rgba(25, 39, 40, 0.72);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.16);
+  color: #fff;
+  font: 700 clamp(0.65rem, 0.82vw, 0.82rem) / 1 var(--ez-font);
+  letter-spacing: 0.075em;
+  white-space: nowrap;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.cinematic-skip:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.9);
+  background: rgba(0, 112, 122, 0.94);
+}
+
+.cinematic-skip:active {
+  transform: translateY(0);
+}
+
 .cinematic-cta {
   position: absolute;
   top: 10.3%;
@@ -61,6 +97,7 @@
 }
 
 .cinematic-cta:focus-visible,
+.cinematic-skip:focus-visible,
 .simulator-return:focus-visible {
   outline: 2px solid #fff;
   outline-offset: 3px;
@@ -95,6 +132,16 @@
 }
 
 @media (max-width: 767px) {
+  .cinematic-skip {
+    top: 10px;
+    right: 10px;
+    min-height: 44px;
+    padding: 10px 12px;
+    gap: 5px;
+    font-size: clamp(0.58rem, 2.3vw, 0.72rem);
+    letter-spacing: 0.04em;
+  }
+
   .simulator-return {
     top: 12px;
     left: 12px;
@@ -102,7 +149,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cinematic-cta {
+  .cinematic-cta,
+  .cinematic-skip {
     transition: none;
   }
 }

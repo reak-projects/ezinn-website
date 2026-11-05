@@ -61,8 +61,11 @@ function SimulatorContainer({ onClose }) {
 
 export default function CinematicExperience() {
   const frameRef = useRef(null);
+  const videoRef = useRef(null);
+  const skipButtonRef = useRef(null);
   const screenButtonRef = useRef(null);
   const zoomTweenRef = useRef(null);
+  const simulatorEntryRef = useRef(null);
   const [hasEnded, setHasEnded] = useState(false);
   const [isSimulatorOpen, setIsSimulatorOpen] = useState(false);
 
@@ -71,11 +74,25 @@ export default function CinematicExperience() {
   const closeSimulator = () => {
     zoomTweenRef.current?.kill();
     zoomTweenRef.current = null;
-    if (frameRef.current) {
+    if (simulatorEntryRef.current === "zoom" && frameRef.current) {
       gsap.set(frameRef.current, { clearProps: "all" });
     }
+    const entryMethod = simulatorEntryRef.current;
+    simulatorEntryRef.current = null;
     setIsSimulatorOpen(false);
-    screenButtonRef.current?.focus();
+    if (entryMethod === "skip") {
+      skipButtonRef.current?.focus();
+    } else {
+      screenButtonRef.current?.focus();
+    }
+  };
+
+  const handleSkipVideo = () => {
+    if (isSimulatorOpen || zoomTweenRef.current) return;
+
+    videoRef.current?.pause();
+    simulatorEntryRef.current = "skip";
+    setIsSimulatorOpen(true);
   };
 
   const handleExperienceClick = () => {
@@ -86,6 +103,7 @@ export default function CinematicExperience() {
 
     const frameBounds = frame.getBoundingClientRect();
     const screenBounds = screenButton.getBoundingClientRect();
+    simulatorEntryRef.current = "zoom";
     const scale = Math.max(
       window.innerWidth / screenBounds.width,
       window.innerHeight / screenBounds.height
@@ -130,6 +148,7 @@ export default function CinematicExperience() {
         <div className="cinematic-stage">
           <div className="cinematic-frame" ref={frameRef}>
             <video
+              ref={videoRef}
               className="cinematic-video"
               src="/gemini_generated_video_e42a8756.mp4"
               autoPlay
@@ -138,6 +157,14 @@ export default function CinematicExperience() {
               preload="auto"
               onEnded={() => setHasEnded(true)}
             />
+            <button
+              ref={skipButtonRef}
+              className="cinematic-skip"
+              type="button"
+              onClick={handleSkipVideo}
+            >
+              SKIP VIDEO <span aria-hidden="true">→</span> START DEMO
+            </button>
             <button
               ref={screenButtonRef}
               className={`cinematic-cta${hasEnded ? " is-visible" : ""}`}
