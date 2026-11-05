@@ -38,7 +38,7 @@ Use Node.js 22.12 or later. Copy `.env.example` to `.env` and replace the exampl
 
 | Variable | Purpose |
 | --- | --- |
-| `DEMO_RECIPIENT_EMAIL` | EZinn business inbox that should receive demo requests |
+| `DEMO_RECIPIENT_EMAIL` | Comma-separated EZinn inboxes that should receive demo requests |
 | `SMTP_HOST` | SMTP server hostname from your email provider |
 | `SMTP_PORT` | SMTP port, commonly `587` or `465` |
 | `SMTP_SECURE` | Set to `true` for implicit TLS (commonly port `465`); otherwise set to `false` (commonly port `587` with STARTTLS) |
@@ -48,6 +48,7 @@ Use Node.js 22.12 or later. Copy `.env.example` to `.env` and replace the exampl
 | `PORT` | Optional API port; defaults to `3001` |
 
 Keep `.env` private and do not prefix these server variables with `VITE_`. The checked-in `.env.example` contains placeholders, not working credentials.
+Set `DEMO_RECIPIENT_EMAIL` to `info@ezinnkiosk.com,ezinnkiosk@gmail.com` in the server environment. All listed addresses must be accepted by SMTP for the API to return success.
 
 ### Run locally
 

@@ -13,7 +13,7 @@ const validRequest = {
 };
 
 const testEnv = {
-  DEMO_RECIPIENT_EMAIL: "sales@ezinn.example",
+  DEMO_RECIPIENT_EMAIL: "sales@ezinn.example, demos@ezinn.example",
   SMTP_HOST: "smtp.example.com",
   SMTP_PORT: "587",
   SMTP_SECURE: "false",
@@ -46,6 +46,7 @@ async function postRequest(url, body = validRequest) {
 
 test("valid demo request sends all submitted details and a server timestamp", async () => {
   let sentMessage;
+  const recipients = testEnv.DEMO_RECIPIENT_EMAIL.split(",").map((address) => address.trim());
 
   await withApi({
     env: testEnv,
@@ -53,13 +54,13 @@ test("valid demo request sends all submitted details and a server timestamp", as
     createTransport: () => ({
       sendMail: async (message) => {
         sentMessage = message;
-        return { accepted: ["sales@ezinn.example"] };
+        return { accepted: recipients };
       },
     }),
   }, async (url) => {
     const response = await postRequest(url);
     assert.equal(response.status, 200);
-    assert.equal(sentMessage.to, testEnv.DEMO_RECIPIENT_EMAIL);
+    assert.deepEqual(sentMessage.to, recipients);
     assert.equal(sentMessage.replyTo, validRequest.email);
     for (const [label, value] of [
       ["Full Name", validRequest.fullName],
@@ -88,7 +89,7 @@ test("invalid form data returns validation errors without attempting email", asy
     createTransport: () => ({
       sendMail: async () => {
         sendAttempts += 1;
-        return { accepted: ["sales@ezinn.example"] };
+        return { accepted: testEnv.DEMO_RECIPIENT_EMAIL.split(",").map((address) => address.trim()) };
       },
     }),
   }, async (url) => {
@@ -110,7 +111,7 @@ test("delivery failures return an error and a later retry can succeed", async ()
       sendMail: async () => {
         sendAttempts += 1;
         if (sendAttempts === 1) throw Object.assign(new Error("SMTP unavailable"), { code: "ECONNECTION" });
-        return { accepted: ["sales@ezinn.example"] };
+        return { accepted: testEnv.DEMO_RECIPIENT_EMAIL.split(",").map((address) => address.trim()) };
       },
     }),
   }, async (url) => {
@@ -122,6 +123,53 @@ test("delivery failures return an error and a later retry can succeed", async ()
     const retryResponse = await postRequest(url);
     assert.equal(retryResponse.status, 200);
     assert.equal(sendAttempts, 2);
+  });
+});
+
+test("invalid configured recipient addresses prevent the SMTP send", async () => {
+  let sendAttempts = 0;
+  const env = {
+    ...testEnv,
+    DEMO_RECIPIENT_EMAIL: "sales@ezinn.example, invalid-address",
+  };
+
+  await withApi({
+    env,
+    createTransport: () => ({
+      sendMail: async () => {
+        sendAttempts += 1;
+        return { accepted: [] };
+      },
+    }),
+  }, async (url) => {
+    const response = await postRequest(url);
+    const result = await response.json();
+
+    assert.equal(response.status, 502);
+    assert.match(result.error, /try again/i);
+    assert.equal(sendAttempts, 0);
+  });
+});
+
+test("partial recipient acceptance returns a delivery failure", async () => {
+  const recipients = testEnv.DEMO_RECIPIENT_EMAIL.split(",").map((address) => address.trim());
+  let sentMessage;
+
+  await withApi({
+    env: testEnv,
+    createTransport: () => ({
+      sendMail: async (message) => {
+        sentMessage = message;
+        return { accepted: [recipients[0]], rejected: [recipients[1]] };
+      },
+    }),
+  }, async (url) => {
+    const response = await postRequest(url);
+    const result = await response.json();
+
+    assert.deepEqual(sentMessage.to, recipients);
+    assert.equal(response.status, 502);
+    assert.match(result.error, /try again/i);
   });
 });
 

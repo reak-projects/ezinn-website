@@ -128,8 +128,8 @@ function smtpConfiguration(env) {
     throw new Error("SMTP configuration is incomplete.");
   }
 
-  const recipient = env.DEMO_RECIPIENT_EMAIL.trim();
-  if (!emailPattern.test(recipient)) {
+  const recipients = env.DEMO_RECIPIENT_EMAIL.split(",").map((address) => address.trim());
+  if (recipients.some((address) => !emailPattern.test(address))) {
     throw new Error("SMTP recipient configuration is invalid.");
   }
 
@@ -151,7 +151,7 @@ function smtpConfiguration(env) {
   }
 
   return {
-    recipient,
+    recipients,
     transport: {
       host: env.SMTP_HOST.trim(),
       port,
@@ -249,18 +249,23 @@ export function createDemoRequestHandler({
       ].join("\n");
       const info = await transport.sendMail({
         from: config.from,
-        to: config.recipient,
+        to: config.recipients,
         replyTo: details.email,
         subject: "New EZinn Request a Demo",
         text,
       });
 
       const acceptedRecipients = Array.isArray(info?.accepted) ? info.accepted : [];
-      const recipientAccepted = acceptedRecipients.some((address) =>
-        typeof address === "string" && address.toLowerCase() === config.recipient.toLowerCase()
+      const acceptedAddresses = new Set(
+        acceptedRecipients
+          .filter((address) => typeof address === "string")
+          .map((address) => address.trim().toLowerCase()),
       );
-      if (!recipientAccepted) {
-        throw new Error("The recipient did not accept the email.");
+      const unacceptedRecipients = config.recipients.filter(
+        (address) => !acceptedAddresses.has(address.toLowerCase()),
+      );
+      if (unacceptedRecipients.length > 0) {
+        throw new Error("One or more recipients did not accept the email.");
       }
 
       sendJson(response, 200, { message: "Demo request email accepted." });

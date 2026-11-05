@@ -14,7 +14,7 @@ const validRequest = {
 };
 
 const testEnv = {
-  DEMO_RECIPIENT_EMAIL: "sales@ezinn.example",
+  DEMO_RECIPIENT_EMAIL: "sales@ezinn.example, demos@ezinn.example",
   SMTP_HOST: "smtp.example.com",
   SMTP_PORT: "587",
   SMTP_SECURE: "false",
@@ -62,7 +62,9 @@ test("Vercel function accepts the platform-parsed request body and sends via SMT
     createTransport: () => ({
       sendMail: async (message) => {
         sentMessage = message;
-        return { accepted: ["sales@ezinn.example"] };
+        return {
+          accepted: testEnv.DEMO_RECIPIENT_EMAIL.split(",").map((address) => address.trim()),
+        };
       },
     }),
   });
@@ -75,7 +77,10 @@ test("Vercel function accepts the platform-parsed request body and sends via SMT
     });
 
     assert.equal(response.status, 200);
-    assert.equal(sentMessage.to, testEnv.DEMO_RECIPIENT_EMAIL);
+    assert.deepEqual(
+      sentMessage.to,
+      testEnv.DEMO_RECIPIENT_EMAIL.split(",").map((address) => address.trim()),
+    );
     for (const [label, value] of [
       ["Full Name", validRequest.fullName],
       ["Work Email", validRequest.email],
@@ -97,7 +102,9 @@ test("Vercel function returns validation failures without sending", async () => 
     createTransport: () => ({
       sendMail: async () => {
         sendAttempts += 1;
-        return { accepted: [testEnv.DEMO_RECIPIENT_EMAIL] };
+        return {
+          accepted: testEnv.DEMO_RECIPIENT_EMAIL.split(",").map((address) => address.trim()),
+        };
       },
     }),
   });
